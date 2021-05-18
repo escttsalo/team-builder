@@ -2,7 +2,10 @@ import './App.css';
 import React, { useState } from 'react';
 
 const initialVals = {
-
+  username: '',
+  email: '',
+  role: '',
+  date: '',
 }
 
 function App() {
@@ -17,9 +20,11 @@ function App() {
       {
       members.length>0 && 
       members.map(member => {
+        return (
         <div className='container'>
           <h2>{member.name}</h2>
         </div>
+        )
       })
       }
     </div>
