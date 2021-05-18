@@ -1,7 +1,11 @@
 import './App.css';
 import React, { useState } from 'react';
 
+import Member from './Member';
+import Form from './Form';
+
 const initialVals = {
+  id: '',
   username: '',
   email: '',
   role: '',
@@ -21,12 +25,15 @@ function App() {
       members.length>0 && 
       members.map(member => {
         return (
-        <div className='container'>
-          <h2>{member.name}</h2>
-        </div>
+          <Member key={member.id} member={member}/>
         )
       })
       }
+
+      <Form 
+      update={setFormVals}
+      values={formVals}
+      />
     </div>
   );
 }
