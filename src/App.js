@@ -5,7 +5,6 @@ import Member from './Member';
 import Form from './Form';
 
 const initialVals = {
-  id: '',
   username: '',
   email: '',
   role: '',
@@ -23,15 +22,16 @@ function App() {
 
       {
       members.length>0 && 
-      members.map(member => {
+      members.map( (member, i )=> {
         return (
-          <Member key={member.id} member={member}/>
+          <Member key={i} member={member}/>
         )
       })
       }
 
       <Form 
       update={setFormVals}
+      submit={setMembers}
       values={formVals}
       />
     </div>
