@@ -8,14 +8,32 @@ var yyyy = today.getFullYear();
 today = yyyy + '-' +  mm + '-' + dd;
 
 export default function Form(props){
-    const { update, submit, values } = props;
+    const { update, submit, members, initial, values } = props;
 
     const updateForm = e => {
-        console.log(e.target.value)
+        const { name, value } = e.target
+        update({...values, [name]: value })
     } 
 
+    const submitForm = e => {
+        e.preventDefault()
+        const newMember = {
+            username: values.username.trim(),
+            email: values.email.trim(),
+            role: values.role,
+            date: values.date,
+        }
+
+        if(!newMember.username || !newMember.email || !newMember.role || !newMember){
+            return
+        }
+
+        submit([...members, newMember])
+        update(initial)
+    }
+
     return (
-        <form className='form container'>
+        <form className='form container' onSubmit={submitForm}>
             <div className='form-group inputs'>
 
                 {/* Username input field*/}
@@ -25,7 +43,7 @@ export default function Form(props){
                         placeholder='R. Belmont'
                         name='username'
                         value={values.username}
-                        onChange={null}
+                        onChange={updateForm}
                     />
                 </label>
 
@@ -36,13 +54,13 @@ export default function Form(props){
                         name='email'
                         placeholder='somevato@gmail.com'
                         value={values.email}
-                        onChange={null}
+                        onChange={updateForm}
                     />
                 </label>
 
                 {/* Dropdown input field*/}
                 <label>Role
-                    <select value={values.role} name='role' onChange={null}>
+                    <select value={values.role} name='role' onChange={updateForm}>
                         <option value=''>---Select a Role---</option>
                         <option value='Backend'>Backend</option>
                         <option value='Frontend'>Frontend</option>
@@ -58,7 +76,7 @@ export default function Form(props){
                         type='date'
                         name='date'
                         placeholder={today}
-                        // value={today}
+                        value={values.date}
                         onChange={updateForm}
                     />
                 </label>

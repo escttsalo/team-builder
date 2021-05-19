@@ -21,7 +21,6 @@ function App() {
       <h1>Team Members</h1>
 
       {
-      members.length>0 && 
       members.map( (member, i )=> {
         return (
           <Member key={i} member={member}/>
@@ -31,6 +30,8 @@ function App() {
 
       <Form 
       update={setFormVals}
+      members={members}
+      initial={initialVals}
       submit={setMembers}
       values={formVals}
       />
